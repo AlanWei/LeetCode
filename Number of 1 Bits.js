@@ -6,19 +6,19 @@
  * @param {number} n - a positive integer
  * @return {number}
  */
-var hammingWeight = function(n) {
-    
+var hammingWeight = function (n) {
+
     var s = (n >>> 0).toString(2);
-    
+
     s = s.toString();
-    
+
     var result = 0;
-    
-    for (var i = 0; i<s.length; i++){
-        if (s.charAt(i) === "1"){
-            result ++;
+
+    for (var i = 0; i < s.length; i++) {
+        if (s.charAt(i) === "1") {
+            result++;
         }
     }
-    
+
     return result;
 };

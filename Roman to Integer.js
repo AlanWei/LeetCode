@@ -5,44 +5,44 @@
  * @param {string} s
  * @return {number}
  */
-var romanToInt = function(s) {
-    
+var romanToInt = function (s) {
+
     var length = s.length;
     var i = 0;
     var result = 0;
-    
-    if (length === 1){
+
+    if (length === 1) {
         return roman(s);
     }
-    else{
-        while (i < length){
-            if ( i === (length - 1)){
+    else {
+        while (i < length) {
+            if (i === (length - 1)) {
                 result += roman(s.charAt(i));
                 break;
             }
-            else{
+            else {
                 var c1 = roman(s.charAt(i));
-                var c2 = roman(s.charAt(i+1));
-                
-                if (compare(c1, c2)){
+                var c2 = roman(s.charAt(i + 1));
+
+                if (compare(c1, c2)) {
                     result += c1;
                     i++;
                 }
-                else{
+                else {
                     result += (c1 - c2);
-                    i = i+2;
+                    i = i + 2;
                 }
             }
         }
     }
-    
+
     return result;
 };
 
-var roman = function(roman){
-    
-    switch (roman){
-        
+var roman = function (r) {
+
+    switch (r) {
+
         case "I":
             return 1;
         case "V":
@@ -58,15 +58,15 @@ var roman = function(roman){
         case "M":
             return 1000;
         default:
-            return "Error";
+            return 0;
     }
 }
 
-var compare = function(i1, i2){
-    if (i1 >= i2){
+var compare = function (i1, i2) {
+    if (i1 >= i2) {
         return true;
     }
-    else{
+    else {
         return false;
     }
 }
