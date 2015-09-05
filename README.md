@@ -1,3 +1,3 @@
 # LeetCode
 
-Some C# and JavaScript code
+LeetCode in JavaScript
