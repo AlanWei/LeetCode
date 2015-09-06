@@ -5,27 +5,23 @@
  */
 var isAnagram = function (s, t) {
 
-	var ss = decide(s);
-	var tt = decide(t);
-
-	if (ss.length !== tt.length) {
+	if (s.length !== t.length) {
 		return false;
 	}
-	else {
-		for (var i = 0; i < ss.length; i++) {
-			if (ss[i].char !== tt[i].char) {
-				return false;
-			}
-			else if (ss[i].times !== tt[i].times) {
-				return false;
-			}
+
+	var ss = processData(s);
+	var tt = processData(t);
+
+	for (var i = 0; i < ss.length; i++) {
+		if (ss[i].char !== tt[i].char || ss[i].times !== tt[i].times) {
+			return false;
 		}
 	}
 
 	return true;
 };
 
-function decide(s) {
+function processData(s) {
 	var containChar = [];
 
 	for (var i = 0; i < s.length; i++) {
