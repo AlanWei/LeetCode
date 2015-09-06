@@ -21,11 +21,11 @@ var isAnagram = function (s, t) {
 	return true;
 };
 
-function processData(s) {
+function processData(value) {
 	var containChar = [];
 
-	for (var i = 0; i < s.length; i++) {
-		var temp = s[i];
+	for (var i = 0; i < value.length; i++) {
+		var temp = value[i];
 		var sss = false;
 
 		for (var k = 0; k < containChar.length; k++) {
