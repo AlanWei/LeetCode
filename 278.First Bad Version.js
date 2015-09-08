@@ -23,51 +23,38 @@ var solution = function (isBadVersion) {
         var results = [];
 
         var remain = function (start, end) {
+            var result = [];
 
             if (end - start === 1) {
                 if (isBadVersion(start)) {
                     end = start;
-                    results.push(start, end);
+                    result.push(start, end);
+                    return result;
                 }
                 else {
                     start = end;
-                    results.push(start);
-                    results.push(start, end);
+                    result.push(start, end);
+                    return result;
                 }
             }
 
             var v = Math.round((start + end) / 2);
-            var result = [];
 
             if (isBadVersion(v)) {
-                if (v === start) {
-                    end = v;
-                    result.push(start);
-                    result.push(end);
-                    return result;
-                }
-                else {
-                    start = 1;
-                    end = v;
-                    result.push(start);
-                    result.push(end);
-                    return result;
-                }
+                start = 1;
+                end = v;
+                result.push(start);
+                result.push(end);
+                return result;
+
             }
             else {
-                if (v === end) {
-                    start = v;
-                    result.push(start);
-                    result.push(end);
-                    return result;
-                }
-                else {
-                    start = v;
-                    end = end;
-                    result.push(start);
-                    result.push(end);
-                    return result;
-                }
+                start = v;
+                end = end;
+                result.push(start);
+                result.push(end);
+                return result;
+
             }
         };
 
