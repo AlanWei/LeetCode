@@ -8,7 +8,7 @@ public class Solution {
         string binary = Convert.ToString(n, 2);
         string result = "";
         StringBuilder sb = new StringBuilder();
-        Console.Write(binary.Length);
+        
         if (binary.Length <= 32){
             string addZero = Solution.formZero(32 - binary.Length);
             sb.Append(binary);
