@@ -67,7 +67,6 @@ var ladderLength = function(beginWord, endWord, wordList) {
   const endVisited = [];
 
   while (beginEnum.length > 0 && endEnum.length > 0) {
-
     if (helper3(beginEnum, endEnum)) {
       return count;
     }
