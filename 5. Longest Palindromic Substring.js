@@ -10,77 +10,38 @@
  */
 
 /**
+ * Hints:
+ * Palindrome question could be transfered to find the middle point of a palindrome string.
+ */
+
+/**
  * @param {string} s
  * @return {string}
  */
 var longestPalindrome = function(s) {
-  s = s.split("");
   if (s.length < 2) {
-    return s.join("");
+    return s;
   }
-
-  let max = [];
-  for (let i = 0; i < s.length; i++) {
-    for (let j = 0; j <= i; j++) {
-      if (s[i - j] !== s[i + j]) {
-        const part = s.slice(i - j + 1, i + j);
-        if (part.length > max.length) {
-          max = part;
-        }
-        break;
-      }
-      if (i - j === 0) {
-        const part = s.slice(0, i + j + 1);
-        if (part.length > max.length) {
-          max = part;
-        }
-      }
+  let longest = 0;
+  let substr = '';
+  const extend = (i, j) => {
+    while (i >= 0 && j < s.length && s.charAt(i) === s.charAt(j)) {
+      i--;
+      j++;
     }
-    for (let j = 0; j <= i; j++) {
-      if (s[i - j] !== s[i + j + 1]) {
-        const part = s.slice(i - j + 1, i + j + 1);
-        if (part.length > max.length) {
-          max = part;
-        }
-        break;
-      }
-      if (i - j === 0) {
-        const part = s.slice(0, i + j + 2);
-        if (part.length > max.length) {
-          max = part;
-        }
-      }
+    if (longest < j - i - 1) {
+      longest = j - i - 1;
+      substr = s.substring(i + 1, j);
     }
   }
+  for (let i = 0; i < s.length - 1; i++) {
+    extend(i, i);
+    extend(i, i + 1);
+  }
 
-  return max.join("");
-};
-// function isPalindrome(str) {
-//   return str.split("").reverse().join("") === str;
-// }
+  return substr;
+}
 
-// var longestPalindrome = function(s) {
-//   const map = {};
-//   return s.split("").reduce((max, char, idx) => {
-//     if (map[char] === undefined) {
-//       map[char] = [idx];
-//       const substr = s.substring(idx, idx + 1);
-//       if (substr.length > max.length) {
-//         return substr;
-//       }
-//       return max;
-//     }
-//     const matchArr = map[char];
-//     for (let i = 0; i < matchArr.length; i++) {
-//       const substr = s.substring(matchArr[i], idx + 1);
-//       if (substr.length > max.length) {
-//         if (isPalindrome(substr)) {
-//           matchArr.push(idx);
-//           return substr;
-//         }
-//       }
-//     }
-//     matchArr.push(idx);
-//     return max;
-//   }, "");
-// };
+console.log(longestPalindrome("a"));
+console.log(longestPalindrome("babad"));
+console.log(longestPalindrome("babab"));

@@ -1,48 +1,39 @@
 /**
+ * There are two sorted arrays nums1 and nums2 of size m and n respectively.
+ * Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+ */
+
+/**
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-  const merged = merge(nums1, nums2);
+  const l1 = nums1.length;
+  const l2 = nums2.length;
+  const median = Math.floor((l1 + l2) / 2);
 
-  if (merged.length === 0) {
-    return 0;
-  }
-  if (merged.length === 1) {
-    return merged[0];
-  }
-
-  const reminder = merged.length % 2;
-  if (reminder === 0) {
-    return (merged[parseInt(merged.length / 2) - 1] + merged[parseInt(merged.length / 2)]) / 2;
-  }
-
-  return merged[parseInt(merged.length / 2)];
-};
-
-var merge = function(arr1, arr2) {
-  if (arr1.length === 0) {
-    return arr2;
-  }
-  if (arr2.length === 0) {
-    return arr1;
-  }
-  const merged = new Array(arr1.length + arr2.length);
-
-  for (let i = 0; i < merged.length; i++) {
-    if (arr1.length === 0) {
-      merged[i] = arr2.shift();
-    } else if (arr2.length === 0) {
-      merged[i] = arr1.shift();
+  let newArr = [];
+  while (nums1.length > 0 && nums2.length > 0) {
+    if (nums1[0] <= nums2[0]) {
+      newArr.push(nums1.shift());
     } else {
-      if (arr1[0] <= arr2[0]) {
-        merged[i] = arr1.shift();
-      } else {
-        merged[i] = arr2.shift();
+      newArr.push(nums2.shift());
+    }
+    if (newArr.length === median + 1) {
+      if ((l1 + l2) % 2 === 0) {
+        return ((newArr[median] + newArr[median - 1]) / 2);
       }
+      return newArr[median];
     }
   }
-
-  return merged;
+  newArr = newArr.concat(nums1);
+  newArr = newArr.concat(nums2);
+  if ((l1 + l2) % 2 === 0) {
+    return ((newArr[median] + newArr[median - 1]) / 2);
+  }
+  return newArr[median];
 }
+
+console.log(findMedianSortedArrays([1, 3], [2]));
+console.log(findMedianSortedArrays([1, 2], [3, 4]));

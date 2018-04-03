@@ -8,10 +8,8 @@
 
 /**
  * Hints:
- * Keep a map to record largest index of each number.
- * Keep a pointer to record current non-repeating index on the left.
- * Use Array.reduce to record temp longest substring length.
- * Compare the length between current number and non-repeating index on the left and temp longest substring length.
+ * Two pointer to record the current longest non-repeating substring.
+ * If there is a duplicate char, move left pointer to the nearest non-repeating position.
  */
 
 /**
@@ -19,41 +17,25 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-  const map = {};
-  let left = 0;
-  return s.split('').reduce((max, num, idx) => {
-    left = map[num] >= left ? map[num] + 1 : left;
-    map[num] = idx;
+  let leftPointer = 0;
+  let rightPointer = 0;
+  let longest = 0;
+  let tempIdx = 0;
 
-    return Math.max(max, idx - left + 1);
-  }, 0);
+  for (let i = 0; i < s.length; i++) {
+    const substr = s.substring(leftPointer, rightPointer);
+    const prevIdx = substr.indexOf(s.charAt(i));
+    if (prevIdx !== -1) {
+      longest = Math.max(longest, rightPointer - leftPointer);
+      leftPointer += (prevIdx + 1);
+    }
+    rightPointer++;
+  }
+
+  return Math.max(longest, rightPointer - leftPointer);
 };
 
-// var lengthOfLongestSubstring = function(s) {
-//     const chars = s.split('');
-//     let longest = [];
-//     if (chars.length === 0) {
-//         return 0;
-//     }
-//     let tempLongest = [];
-//     for (let i = 0; i < chars.length; i++) {
-//         longest = [chars[i]];
-//         for (let j = i + 1; j < chars.length; j++) {
-//             if (longest.indexOf(chars[j]) === -1) {
-//                 longest.push(chars[j]);
-//             } else {
-//                 break;
-//             }
-//         }
-//         if (longest.length > tempLongest.length) {
-//             tempLongest = longest;
-//         }
-//         longest = [];
-//         const remain = chars.length - (i + 1);
-//         if (tempLongest.length >= remain) {
-//             break;
-//         }
-//     }
-
-//     return tempLongest.length;
-// };
+console.log(lengthOfLongestSubstring('abcabcbb'));
+console.log(lengthOfLongestSubstring('bbbbb'));
+console.log(lengthOfLongestSubstring('pwwkew'));
+console.log(lengthOfLongestSubstring("dvdf"));
