@@ -29,3 +29,5 @@ var majorityElement = function(nums) {
   
   return maxNum;
 };
+
+console.log(majorityElement([3, 2, 3]));
