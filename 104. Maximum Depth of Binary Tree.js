@@ -9,9 +9,9 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var maxDepth = function(root) {
+var maxDepth = function (root) {
   if (root !== null) {
-    return 1+Math.max(maxDepth(root.left), maxDepth(root.right));
+    return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
   }
 
   return 0;

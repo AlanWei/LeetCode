@@ -3,7 +3,7 @@
  * @return {boolean}
  */
 
-var helper = function (s, count, map) {
+var helper = function (s, count) {
   if (count < 0) {
     return false;
   }
@@ -16,18 +16,18 @@ var helper = function (s, count, map) {
   var cur = s.charAt(0);
   switch (cur) {
     case "(":
-      return helper(s.substring(1), count + 1, map);
+      return helper(s.substring(1), count + 1);
     case ")":
-      return helper(s.substring(1), count - 1, map);
+      return helper(s.substring(1), count - 1);
     case "*":
       return (
-        helper(s.substring(1), count + 1, map) ||
-        helper(s.substring(1), count, map) ||
-        helper(s.substring(1), count - 1, map)
+        helper(s.substring(1), count + 1) ||
+        helper(s.substring(1), count) ||
+        helper(s.substring(1), count - 1)
       );
   }
 };
 
 var checkValidString = function (s) {
-  return helper(s, 0, {});
+  return helper(s, 0);
 };
