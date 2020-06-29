@@ -13,7 +13,7 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
+var twoSum = function (nums, target) {
   for (let i = 0; i < nums.length; i++) {
     const matchIdx = nums.indexOf(target - nums[i]);
     if (matchIdx !== -1 && matchIdx !== i) {
@@ -22,4 +22,4 @@ var twoSum = function(nums, target) {
   }
 };
 
-console.log(twoSum([3, 2, 4], 6))
+console.log(twoSum([3, 2, 4], 6));
