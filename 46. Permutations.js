@@ -10,8 +10,8 @@ var permute = function(nums) {
     if (nums.length === 0) {
       ro.push(current);
     }
-    for (let i = 0; i < nums.length; i++) {
-      const newArr = nums.slice(0, i).concat(nums.slice(i + 1));
+    for (var i = 0; i < nums.length; i++) {
+      var newArr = nums.slice(0, i).concat(nums.slice(i + 1));
       iterate(newArr, current.concat(nums[i]));
     }
   }
@@ -20,3 +20,5 @@ var permute = function(nums) {
 
   return ro;
 };
+
+console.log(permute([1, 2, 3]));
