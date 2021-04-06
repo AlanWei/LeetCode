@@ -16,26 +16,28 @@
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
-  let leftPointer = 0;
-  let rightPointer = 0;
+
+const lengthOfLongestSubstring = (s) => {
+  let left = 0;
+  let right = 0;
   let longest = 0;
-  let tempIdx = 0;
 
   for (let i = 0; i < s.length; i++) {
-    const substr = s.substring(leftPointer, rightPointer);
-    const prevIdx = substr.indexOf(s.charAt(i));
-    if (prevIdx !== -1) {
-      longest = Math.max(longest, rightPointer - leftPointer);
-      leftPointer += (prevIdx + 1);
+    const cur = s.charAt(i);
+    const substr = s.substring(left, right);
+    const leftIndex = substr.indexOf(cur);
+    if (leftIndex !== -1) {
+      longest = Math.max(right - left, longest);
+      left += leftIndex + 1;
     }
-    rightPointer++;
+    right++;
   }
 
-  return Math.max(longest, rightPointer - leftPointer);
+  return Math.max(right - left, longest);
 };
 
-console.log(lengthOfLongestSubstring('abcabcbb'));
-console.log(lengthOfLongestSubstring('bbbbb'));
-console.log(lengthOfLongestSubstring('pwwkew'));
+console.log(lengthOfLongestSubstring("abcabcbb"));
+console.log(lengthOfLongestSubstring("bbbbb"));
+console.log(lengthOfLongestSubstring("pwwkew"));
 console.log(lengthOfLongestSubstring("dvdf"));
+console.log(lengthOfLongestSubstring("aab"));
