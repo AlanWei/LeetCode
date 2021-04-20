@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
+var threeSum = function (nums) {
   const ro = [];
   const len = nums.length;
   if (len < 3) {
@@ -26,8 +26,8 @@ var threeSum = function(nums) {
           }
           while (j < k && nums[k] === nums[k + 1]) {
             k--;
-          } 
-        } else if(sum < target) {
+          }
+        } else if (sum < target) {
           j++;
         } else {
           k--;
